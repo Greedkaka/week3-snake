@@ -3,10 +3,9 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
-#include <windows.h>
 
 #define BOARD_SIZE 15
-#define MOVE_DELAY 60
+#define MOVE_DELAY 24
 #define WALL_VERTICAL_STRING "┃"
 #define WALL_HORIZONTAL_STRING "━"
 #define WALL_RIGHT_TOP_STRING "┓"
@@ -37,7 +36,7 @@ void map(){
 
 int main(){
   srand((unsigned int)time(NULL));
-  int count=1,score=0,timer=0,xa=rand()%(BOARD_SIZE-2)+1,ya=rand()%(BOARD_SIZE-2)+1,a=0;
+  int count=0,score=0,timer=0,xa=rand()%(BOARD_SIZE-2)+1,ya=rand()%(BOARD_SIZE-2)+1,a=0;
   std::string last="r";
   int snake_place[2][(BOARD_SIZE-2)*(BOARD_SIZE-2)];//몸톰의 좌표 저장
   snake_place[0][0]=BOARD_SIZE/2;//[0][0]은 머리의 y좌표
@@ -199,11 +198,9 @@ int main(){
       draw(BOARD_SIZE/2-5,BOARD_SIZE,"Score : "+std::to_string(score));
     else
       draw(BOARD_SIZE/2-6,BOARD_SIZE,"Score : "+std::to_string(score));
-    Sleep(500);
-    // if(timer>MOVE_DELAY)
-    //   timer=0;
-    // timer++;  
-    wait();
+    
+    for(int i=0; i<MOVE_DELAY; i++)
+      wait();
   }
   return 0;
 }
